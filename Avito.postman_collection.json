@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "2ce2d857-7d59-473c-bab0-84f9fc7a70b8",
+		"_postman_id": "bdc5f6f7-a863-4d1a-b5ae-47ac560920eb",
 		"name": "Avito",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "12793207"
@@ -98,13 +98,23 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/banner",
+					"raw": "localhost:8080/banner?tag_id=123&feature_id=123",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"banner"
+					],
+					"query": [
+						{
+							"key": "tag_id",
+							"value": "123"
+						},
+						{
+							"key": "feature_id",
+							"value": "123"
+						}
 					]
 				}
 			},
@@ -117,7 +127,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"tag_ids\": [\r\n    123,\r\n    456,\r\n    789\r\n  ],\r\n  \"feature_id\": 1,\r\n  \"content\": {\r\n    \"title\": \"simple banner\",\r\n    \"text\": \"some text\",\r\n    \"url\": \"test.com\"\r\n  },\r\n  \"is_active\": true\r\n}",
+					"raw": "{\r\n  \"tag_ids\": [\r\n    123\r\n  ],\r\n  \"feature_id\": 1,\r\n  \"content\": {\r\n    \"title\": \"simple banner\",\r\n    \"text\": \"some text\",\r\n    \"url\": \"test.com\"\r\n  },\r\n  \"is_active\": true\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -142,6 +152,15 @@
 			"request": {
 				"method": "PATCH",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"tag_ids\": [\r\n    567\r\n  ],\r\n  \"feature_id\": 999,\r\n  \"content\": {\r\n    \"title\": \"some_title\",\r\n    \"text\": \"some_text\",\r\n    \"url\": \"some_url\"\r\n  },\r\n  \"is_active\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
 					"raw": "localhost:8080/banner/1",
 					"host": [
