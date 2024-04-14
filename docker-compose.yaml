@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:16.2
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: qwe
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./schema:/docker-entrypoint-initdb.d/
+  redis:
+    image: redis:7.2
+    ports:
+      - "6379:6379"
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      SECRET: ${SECRET}
+      DATABASE_URL: postgres://postgres:qwe@postgres:5432/postgres?sslmode=disable
+      REDIS_URL: redis:6379
+    depends_on:
+      - postgres
+      - redis
+    ports:
+      - "8080:8080"
