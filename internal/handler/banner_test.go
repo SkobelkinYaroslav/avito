@@ -61,7 +61,10 @@ func TestGetAllBannersHandler(t *testing.T) {
 	h := handler.Handler{BannerService: mockBannerService}
 
 	req := domain.GetBannersRequest{
-		Limit: 10,
+		TagIDs:    []int{-1},
+		FeatureID: -1,
+		Offset:    0,
+		Limit:     10,
 	}
 	reqBody, _ := json.Marshal(req)
 	reqReader := bytes.NewReader(reqBody)

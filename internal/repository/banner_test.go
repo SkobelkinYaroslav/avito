@@ -151,7 +151,7 @@ func TestGetAllBannersRepo(t *testing.T) {
 		Offset:    0,
 	}
 
-	mock.ExpectQuery(regexp.QuoteMeta("SELECT * FROM banner WHERE feature_id = $1 OR tag_ids = ANY($2) LIMIT $3 OFFSET $4")).
+	mock.ExpectQuery(regexp.QuoteMeta("SELECT * FROM banner WHERE feature_id = $1 OR $2 && tag_ids LIMIT $3 OFFSET $4")).
 		WithArgs(req.FeatureID, pq.Array(req.TagIDs), req.Limit, req.Offset).
 		WillReturnRows(rows)
 
@@ -252,13 +252,15 @@ func TestDeleteBannerRepo(t *testing.T) {
 
 	repo := repository.NewBannerRepository(db, nil)
 
-	expectedBannerID := 1
+	req := domain.Banner{
+		BannerID: 1,
+	}
 
-	mock.ExpectExec("^DELETE FROM banner WHERE id = ?").
-		WithArgs(expectedBannerID).
+	mock.ExpectExec("^DELETE FROM banner WHERE banner_id = ?").
+		WithArgs(req.BannerID).
 		WillReturnResult(sqlmock.NewResult(0, 1))
 
-	err = repo.DeleteBannerRepo(expectedBannerID)
+	err = repo.DeleteBannerRepo(req)
 
 	assert.NoError(t, err)
 

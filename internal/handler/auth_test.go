@@ -74,8 +74,8 @@ func TestRequireAuth(t *testing.T) {
 
 	w := httptest.NewRecorder()
 	req, _ := http.NewRequest(http.MethodGet, "/test", nil)
-	//req.Header.Set("Authorization", "token")
-	req.AddCookie(&http.Cookie{Name: "Authorization", Value: "token"})
+	//req.Header.Set("token", "token")
+	req.AddCookie(&http.Cookie{Name: "token", Value: "token"})
 
 	router.ServeHTTP(w, req)
 

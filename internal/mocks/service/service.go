@@ -48,7 +48,7 @@ func (m *BannerService) PatchBannerService(req domain.Banner) error {
 	return args.Error(0)
 }
 
-func (m *BannerService) DeleteBannerService(id int) error {
-	args := m.Called(id)
+func (m *BannerService) DeleteBannerService(req domain.Banner) error {
+	args := m.Called(req)
 	return args.Error(0)
 }

@@ -42,14 +42,14 @@ func (h Handler) LoginHandler(c *gin.Context) {
 	}
 
 	c.SetSameSite(http.SameSiteLaxMode)
-	c.SetCookie("Authorization", token, 3600*24*30, "", "", false, true)
+	c.SetCookie("token", token, 3600*24*30, "", "", false, true)
 
 	c.JSON(http.StatusOK, gin.H{"message": "user logged in"})
 
 }
 
 func (h Handler) RequireAuth(c *gin.Context) {
-	tokenString, err := c.Cookie("Authorization")
+	tokenString, err := c.Cookie("token")
 
 	if err != nil {
 		c.JSON(http.StatusUnauthorized, gin.H{"error": "unauthorized"})

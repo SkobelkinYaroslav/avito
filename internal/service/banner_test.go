@@ -84,11 +84,13 @@ func TestDeleteBannerService(t *testing.T) {
 
 	s := service.NewBannerService(mockBannerRepo)
 
-	id := 1
+	req := domain.Banner{
+		BannerID: 1,
+	}
 
-	mockBannerRepo.On("DeleteBannerRepo", id).Return(nil)
+	mockBannerRepo.On("DeleteBannerRepo", req).Return(nil)
 
-	err := s.DeleteBannerService(id)
+	err := s.DeleteBannerService(req)
 
 	assert.NoError(t, err)
 	mockBannerRepo.AssertExpectations(t)

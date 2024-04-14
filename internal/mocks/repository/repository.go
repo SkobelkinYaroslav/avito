@@ -48,7 +48,7 @@ func (m *BannerRepository) PatchBannerRepo(req domain.Banner) error {
 	return args.Error(0)
 }
 
-func (m *BannerRepository) DeleteBannerRepo(id int) error {
-	args := m.Called(id)
+func (m *BannerRepository) DeleteBannerRepo(req domain.Banner) error {
+	args := m.Called(req)
 	return args.Error(0)
 }
