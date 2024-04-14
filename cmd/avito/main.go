@@ -5,17 +5,12 @@ import (
 	"avito/internal/repository"
 	"avito/internal/service"
 	"database/sql"
-	"github.com/joho/godotenv"
 	"github.com/redis/go-redis/v9"
 	"log"
 	"os"
 )
 
 func main() {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatalln("Error while loading .env: ", err.Error())
-	}
 
 	db, err := sql.Open("postgres", os.Getenv("DATABASE_URL"))
 	defer func(db *sql.DB) {
