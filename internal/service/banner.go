@@ -45,9 +45,9 @@ func (s *BannerService) GetAllBannersService(req domain.GetBannersRequest) ([]do
 
 func (s *BannerService) PostBannerService(req domain.Banner) (domain.Banner, error) {
 	log.Println(req)
-	banner, err := s.BannerRepository.GetUserBannerRepo(domain.GetUserBannerRequest{Banner: req, UseLastRevision: true})
+	bannerCheck, err := s.BannerRepository.GetUserBannerRepo(domain.GetUserBannerRequest{Banner: req, UseLastRevision: true})
 	log.Println(err)
-	if banner.BannerID != 0 && err != nil && err != sql.ErrNoRows {
+	if bannerCheck.BannerID != 0 && err != nil && err != sql.ErrNoRows {
 		return domain.Banner{}, errGroup.AlreadyExists
 	}
 
