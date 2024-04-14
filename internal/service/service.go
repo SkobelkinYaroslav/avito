@@ -14,5 +14,5 @@ type BannerRepository interface {
 	GetAllBannersRepo(req domain.GetBannersRequest) ([]domain.Banner, error)
 	PostBannerRepo(req domain.Banner) (domain.Banner, error)
 	PatchBannerRepo(req domain.Banner) error
-	DeleteBannerRepo(id int) error
+	DeleteBannerRepo(req domain.Banner) error
 }

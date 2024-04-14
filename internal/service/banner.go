@@ -71,8 +71,8 @@ func (s *BannerService) PatchBannerService(req domain.Banner) error {
 	return nil
 }
 
-func (s *BannerService) DeleteBannerService(id int) error {
-	err := s.BannerRepository.DeleteBannerRepo(id)
+func (s *BannerService) DeleteBannerService(req domain.Banner) error {
+	err := s.BannerRepository.DeleteBannerRepo(req)
 	if err == sql.ErrNoRows {
 		return errGroup.NotFound
 	}

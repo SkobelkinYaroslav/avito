@@ -158,6 +158,34 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "/banner?tag_id=..&feature_id=..",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/banner?tag_id=123&feature_id=123",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"banner"
+					],
+					"query": [
+						{
+							"key": "tag_id",
+							"value": "123"
+						},
+						{
+							"key": "feature_id",
+							"value": "123"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

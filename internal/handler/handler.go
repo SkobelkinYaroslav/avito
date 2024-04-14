@@ -16,7 +16,7 @@ type BannerService interface {
 	GetAllBannersService(req domain.GetBannersRequest) ([]domain.Banner, error)
 	PostBannerService(req domain.Banner) (domain.Banner, error)
 	PatchBannerService(req domain.Banner) error
-	DeleteBannerService(id int) error
+	DeleteBannerService(req domain.Banner) error
 }
 
 type Handler struct {
@@ -41,6 +41,7 @@ func NewHandler(authService AuthService, bannerService BannerService) *gin.Engin
 		authApiGroup.POST("/banner", handler.AdminCheck, handler.PostBannerHandler)
 		authApiGroup.PATCH("/banner/:id", handler.AdminCheck, handler.PatchBannerHandler)
 		authApiGroup.DELETE("/banner/:id", handler.AdminCheck, handler.DeleteBannerHandler)
+		authApiGroup.DELETE("/banner", handler.AdminCheck, handler.DeleteBannerByDataHandler)
 	}
 
 	return g

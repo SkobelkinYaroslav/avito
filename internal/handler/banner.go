@@ -180,7 +180,11 @@ func (h Handler) DeleteBannerHandler(c *gin.Context) {
 
 	}
 
-	err = h.BannerService.DeleteBannerService(idInt)
+	req := domain.Banner{
+		BannerID: idInt,
+	}
+
+	err = h.BannerService.DeleteBannerService(req)
 	if err == errGroup.NotFound {
 		c.JSON(http.StatusNotFound, gin.H{"message": "no banner found"})
 		return
@@ -191,4 +195,29 @@ func (h Handler) DeleteBannerHandler(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{"message": "banner deleted"})
+}
+
+func (h Handler) DeleteBannerByDataHandler(c *gin.Context) {
+	var req domain.Banner
+
+	tagIDStr := c.Query("tag_id")
+	tagID, err := strconv.Atoi(tagIDStr)
+	if err != nil {
+		tagID = -1
+	}
+
+	featureIDStr := c.Query("feature_id")
+	featureID, err := strconv.Atoi(featureIDStr)
+	if err != nil {
+		featureID = -1
+	}
+	req.FeatureID = featureID
+	req.TagIDs = []int{tagID}
+
+	go func(req domain.Banner) {
+		_ = h.BannerService.DeleteBannerService(req)
+	}(req)
+
+	c.JSON(http.StatusOK, gin.H{"message": "deleting banner"})
+
 }

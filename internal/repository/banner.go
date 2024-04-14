@@ -63,9 +63,9 @@ func (b BannerRepository) GetUserBannerRepo(req domain.GetUserBannerRequest) (do
 				return domain.Banner{}, err
 			}
 
-			setBanner, err := json.Marshal(banner)
-			if err != nil {
-				return domain.Banner{}, err
+			setBanner, errm := json.Marshal(banner)
+			if errm != nil {
+				return domain.Banner{}, errm
 			}
 
 			err = b.redis.Set(ctx, redisQuery, setBanner, 5*time.Minute).Err()
@@ -215,9 +215,19 @@ func (b BannerRepository) PatchBannerRepo(req domain.Banner) error {
 	return nil
 }
 
-func (b BannerRepository) DeleteBannerRepo(id int) error {
-	query := "DELETE FROM banner WHERE banner_id = $1"
-	result, err := b.db.Exec(query, id)
+func (b BannerRepository) DeleteBannerRepo(req domain.Banner) error {
+	var query string
+	var err error
+	var result sql.Result
+
+	if req.BannerID == -1 {
+		query = "DELETE FROM banner WHERE feature_id = $1 OR tag_ids = $2"
+		result, err = b.db.Exec(query, req.FeatureID, pq.Array(req.TagIDs))
+	} else {
+		query = "DELETE FROM banner WHERE banner_id = $1"
+		result, err = b.db.Exec(query, req.BannerID)
+	}
+
 	if err != nil {
 		return err
 	}

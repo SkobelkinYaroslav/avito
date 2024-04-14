@@ -14,8 +14,8 @@ type GetUserBannerRequest struct {
 type GetBannersRequest struct {
 	TagIDs    []int `json:"tag_ids,omitempty"`
 	FeatureID int   `json:"feature_id,omitempty"`
-	Limit     int
-	Offset    int
+	Limit     int   `json:"limit,omitempty"`
+	Offset    int   `json:"offset,omitempty"`
 }
 type Content struct {
 	Title string `json:"title"`
