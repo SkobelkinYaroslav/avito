@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "b83f9d02-1764-414d-bea6-2b746a1886cc",
+		"_postman_id": "2ce2d857-7d59-473c-bab0-84f9fc7a70b8",
 		"name": "Avito",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "12793207"
@@ -66,13 +66,27 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/user_banner",
+					"raw": "localhost:8080/user_banner?tag_id=123&feature_id=123&use_last_revision=true",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"user_banner"
+					],
+					"query": [
+						{
+							"key": "tag_id",
+							"value": "123"
+						},
+						{
+							"key": "feature_id",
+							"value": "123"
+						},
+						{
+							"key": "use_last_revision",
+							"value": "true"
+						}
 					]
 				}
 			},
@@ -129,13 +143,14 @@
 				"method": "PATCH",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/banner",
+					"raw": "localhost:8080/banner/1",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"banner"
+						"banner",
+						"1"
 					]
 				}
 			},
@@ -147,13 +162,14 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/banner",
+					"raw": "localhost:8080/banner/1",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"banner"
+						"banner",
+						"1"
 					]
 				}
 			},
