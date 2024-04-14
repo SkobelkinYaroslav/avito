@@ -15,3 +15,5 @@ SECRET=YourSecretValue docker-compose up
 - Метод удаления баннеров по фичам или тегам.
 - Код покрыт тестами.
 - Добавлена конфигурация линтера [golangci-lint.](https://github.com/golangci/golangci-lint)
+
+Для тест есть файл с [Postman запросами](https://github.com/SkobelkinYaroslav/avito/blob/main/Avito.postman_collection.json)
